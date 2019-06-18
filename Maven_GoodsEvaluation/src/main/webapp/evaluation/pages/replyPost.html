@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author" content="">
+
+		<title>论坛系统</title>
+
+		<!-- Bootstrap Core CSS -->
+		<link href="/evaluation/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+		<!-- MetisMenu CSS -->
+		<link href="/evaluation/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+		<!-- DataTables CSS -->
+		<link href="/evaluation/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+		<!-- DataTables Responsive CSS -->
+		<!--<link href="/evaluation/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">-->
+
+		<!-- Custom CSS -->
+		<link href="/evaluation/dist/css/sb-admin-2.css" rel="stylesheet">
+
+		<!-- Custom Fonts -->
+		<link href="/evaluation/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    	<style>
+    	
+	    	.col-lg-6{
+	    		width: 700px;
+	    		float: left;
+	    		margin-left: 200px;
+	    	
+	    	}
+	    	
+	    	.evaluate_add{
+	    		float: left;
+	    		margin-top: 20px;
+	    		width: 600px;
+	    		height: 40px;
+	    	}
+	    	.control-label{
+	    		margin-top: 10px;
+	    		width: 80px;
+	    		/*border: yellow solid 1px;*/
+	    	}
+	    	.control-label2{
+	    		margin-top: 10px;
+	    		width: 200px;
+	    		/*border: yellow solid 1px;*/
+	    	}
+	    	.form-control{
+	    		width: 300px;
+	    		/*border: blue solid 1px;*/
+	    	}
+	    	.evaluate_btn{
+	    		float: left;
+	    		margin-top: 50px;
+	    		width: 600px;
+	    		height: 40px;
+	    	}
+	    	.btn-default{
+	    		float: left;
+	    		width: 130px;
+		       	background-color: aquamarine;
+	    	}
+	    	
+	    	.btn2,.btn3{
+	    		margin-left: 70px;
+	    	}
+	    	
+	    	.message{
+	    		width: 100%;
+	    		height: 200px;
+	    		/*border: red solid 1px;*/
+	    	}
+	    	.message .image,.message_txt{
+	    		float: left;
+	    		margin-left: 50px;
+	    		margin-top: 40px;
+	    	}
+	    	.message .image{
+	    		width: 100px;
+	    		margin-top: 50px;
+	    		margin-left: 280px;
+	    	}
+	    	.message .image img{
+	    		width: 100%;
+	    	}
+	    	
+	    	table .active{
+			    background-color: blue!important;
+			    color: red!important;
+			} 
+	    </style>
+	    <style type="text/css">
+	    	.error_message{
+	    		color: red;
+	    		visibility: hidden;/*visible*/ 
+	    	}
+	    </style>
+	   
+	    
+	</head>
+
+	<body>
+
+		<div id="wrapper">
+
+			<div id="page-wrapper">
+				
+				<!-- /.row -->
+				<div class="row">
+					<div class="col-lg-12">
+						
+						
+						<div class="panel panel-default">
+							<div class="panel-heading">
+                               	论坛系统
+                        	</div>
+                        	<div class="message">
+                        		<div class="image">
+									<img src="/evaluation/image/1.gif" th:src="@{${goodsBean.g_image}}"/>
+								</div>
+								<div class="message_txt">
+									<div class="form-group">
+							        	<label for="inputEmail3" class="col-sm-2 control-label">商品名:</label>
+							        	<label for="inputEmail3" class="col-sm-2 control-label2" th:text="${goodsBean.g_name}">月亮与六便士</label>
+                                    </div>
+                                    <div class="form-group">
+							        	<label for="inputEmail3" class="col-sm-2 control-label">类别:</label>
+							        	<label for="inputEmail3" class="col-sm-2 control-label2" th:text="${goodsBean.g_type}">书籍</label>
+                                    </div>
+                                    <div class="form-group">
+							        	<label for="inputEmail3" class="col-sm-2 control-label">单价:</label>
+							        	<label for="inputEmail3" class="col-sm-2 control-label2" th:text="${goodsBean.g_price}">￥39</label>
+                                    </div>
+								</div>
+                        	</div>
+							
+							
+						</div>	
+						
+						<div class="panel panel-default">
+							<!-- /.panel-heading -->
+							<div class="panel-body">
+								<div class="dataTable_wrapper">
+									<table class="table table-striped table-bordered table-hover" id="dataTables-example">
+										<thead>
+											<tr>
+												<th>评论人</th>
+												<th>评论时间</th>
+												<th>内容</th>
+											</tr>
+										</thead>
+										<tbody class="tbody">
+											<tr class="odd gradeX" th:each="eva,iterStat : ${evaList}">
+												<td th:text="${eva.userBean.u_name}">Tom</td>
+												<td th:text="${eva.e_time}">2019-06-15</td>
+												<td th:text="${eva.e_message}">东西不错，很实用</td>
+											</tr>
+											
+										</tbody>
+									</table>
+								</div>
+								<!-- /.table-responsive -->
+
+							</div>
+							<!-- /.panel-body -->
+						</div>
+						<!-- /.panel -->
+					</div>
+					<!-- /.col-lg-12 -->
+				</div>
+				<!-- /.row -->
+
+				<!-- /.row -->
+				<div class="row">
+					<div class="col-lg-6">
+						<div class="panel panel-default">
+							<!--<div class="panel-heading">
+                            Hover Rows
+                        </div>-->
+							<!-- /.panel-heading -->
+							<form role="form" id="myform" action="/evaluation" method="post"><!--  -->
+								<div class="panel-body">
+									<div class="table-responsive">
+										
+								        <div class="evaluate_add">
+	                                        <div class="form-group">
+	                                        	<input type="hidden" id="hid" th:value="${goodsBean.g_id}" name="e_g_id">
+									        	<label for="inputEmail3" class="col-sm-2 control-label1">评论内容</label>
+									            <div class="col-sm-10">
+									            	<textarea class="form-control" id="inputEmail2" placeholder="" name="e_message"></textarea>
+									            	<span class="span error_message">*评论内容不能为空</span>
+									            </div>
+	                                        </div>
+	                                	</div>
+								        
+	                                	
+								        <div class="evaluate_btn">
+	                                		<button type="submit" class="btn2 btn-default" >评论</button>
+	                                   		<a href="/goods"><button type="button" class="btn3 btn-default">返回主界面</button></a>
+	                                	</div>
+	
+									</div>
+									<!-- /.table-responsive -->
+								</div>
+								<!-- /.panel-body -->
+							</form>
+								
+						</div>
+						<!-- /.panel -->
+					</div>
+					
+				</div>
+				<!-- /.row -->
+			</div>
+			<!-- /#page-wrapper -->
+
+		</div>
+		<!-- /#wrapper -->
+
+		<!-- jQuery -->
+		<script src="/evaluation/bower_components/jquery/dist/jquery.min.js"></script>
+
+		<!-- Bootstrap Core JavaScript -->
+		<script src="/evaluation/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+		<!-- Metis Menu Plugin JavaScript -->
+		<script src="/evaluation/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+		<!-- DataTables JavaScript -->
+		<script src="/evaluation/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+		<script src="/evaluation/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+		<!-- Custom Theme JavaScript -->
+		<script src="/evaluation/dist/js/sb-admin-2.js"></script>
+
+		<!-- Page-Level Demo Scripts - Tables - Use for reference -->
+		<script>
+			/* $(".gradeX").click(function(){
+				$(this).addClass("active").siblings().removeClass("active");
+			}); */ 
+
+		</script>
+		
+		<script type="text/javascript">
+			var oinp_message = document.getElementById("inputEmail2");
+			
+			var ospan_message = document.getElementsByClassName("span")[0];
+			
+			function showError(oinp,ospan) {
+	            var inpValue = oinp.value;
+	            if(inpValue==""){
+	                ospan.style.visibility = "visible";
+	                return false;
+	            }else {
+	                ospan.style.visibility = "hidden";
+	                return true;
+	            }
+	        }
+			oinp_message.onblur = function(){
+				return showError(oinp_message,ospan_message);
+			}
+			
+			/*
+	         * 阻止表单提交
+	         * return false 阻止表单提交
+	         * */
+	        var oform = document.getElementById("myform")
+	        oform.onsubmit = function(){
+	            //onblur()表示执行一次 匿名函数
+	            var boo1 = oinp_message.onblur();
+	           
+	            if(boo1 ){
+	                return true;
+	            }
+	            
+	            return false;
+	        }
+	    
+	    </script>
+
+	</body>
+
+</html>
